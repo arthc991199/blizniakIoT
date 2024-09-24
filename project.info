@@ -1,0 +1,5 @@
+cyfrowy blizniak. Symulacja Reakcji na Incydenty Bezpieczeństwa
+
+pis: Użytkownik wciela się w rolę menedżera bezpieczeństwa IT, który musi reagować na różne incydenty cyberbezpieczeństwa w czasie rzeczywistym, korzystając z cyfrowego bliźniaka firmy. Narzędzie ocenia decyzje i działania użytkownika.
+Cele edukacyjne: Nauka reagowania na incydenty w środowisku symulacyjnym, ocena skuteczności różnych strategii zabezpieczeń.
+Technologie: HTML, JavaScript, WebSockets do dynamicznych symulacji.
