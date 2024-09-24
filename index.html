@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symulacja Reakcji na Incydenty</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
+        <div id="incident-area">
+            <p id="incident-description">Oczekiwanie na incydent...</p>
+            <div id="actions">
+                <button onclick="handleAction('action1')">Akcja 1</button>
+                <button onclick="handleAction('action2')">Akcja 2</button>
+                <button onclick="handleAction('action3')">Akcja 3</button>
+            </div>
+        </div>
+        <div id="result-area">
+            <p id="result-message">Twoje decyzje pojawią się tutaj...</p>
+        </div>
+        <button id="new-incident" onclick="generateIncident()">Nowy Incydent</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
