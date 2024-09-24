@@ -3,32 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ver 2 Symulacja Reakcji na Incydenty</title>
+    <title>Symulacja Reakcji na Incydenty Bezpieczeństwa</title>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
-        <div id="status">
+        <button id="start-game" onclick="startGame()">Start</button>
+        <button id="restart" onclick="restartGame()" style="display: none;">Zacznij od nowa</button>
+        
+        <h1 id="game-title">Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
+        
+        <div id="status" style="display: none;">
             <p id="score">Punkty: 0</p>
-            <p id="timer">Czas: 0</p>
+            <p id="incident-progress">Incydent: 1 z 10</p>
         </div>
-        <div id="incident-area">
+        
+        <div id="incident-area" style="display: none;">
             <p id="incident-description">Oczekiwanie na incydent...</p>
             <div id="actions">
-                <button onclick="handleAction('action1')">Akcja 1</button>
-                <button onclick="handleAction('action2')">Akcja 2</button>
-                <button onclick="handleAction('action3')">Akcja 3</button>
-                <button onclick="handleAction('action4')">Akcja 4</button>
-                <button onclick="handleAction('action5')">Akcja 5</button>
+                <button id="action1" onclick="handleAction('action1')">Akcja 1</button>
+                <button id="action2" onclick="handleAction('action2')">Akcja 2</button>
+                <button id="action3" onclick="handleAction('action3')">Akcja 3</button>
+                <button id="action4" onclick="handleAction('action4')">Akcja 4</button>
+                <button id="action5" onclick="handleAction('action5')">Akcja 5</button>
             </div>
         </div>
-        <div id="result-area">
+        
+        <div id="result-area" style="display: none;">
             <p id="result-message">Twoje decyzje pojawią się tutaj...</p>
         </div>
-        <button id="new-incident" onclick="generateIncident()">Nowy Incydent</button>
+
+        <button id="next-incident" onclick="nextIncident()" style="display: none;">Kolejny incydent</button>
+
+        <div id="summary" style="display: none;"> <!-- Ekran podsumowania -->
+            <h2>Podsumowanie gry</h2>
+            <p id="final-score">Twój wynik: 0</p>
+            <button onclick="restartGame()">Zagraj ponownie</button>
+        </div>
     </div>
-    
+
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
