@@ -82,3 +82,15 @@ function handleAction(action) {
     clearInterval(timer); // Zatrzymujemy timer po podjęciu decyzji
     const incident = JSON.parse(document.getElementById('actions').dataset.currentIncident);
     const result = incident.results[action];
+    document.getElementById('result-message').textContent = result.result;
+    score += result.score;
+    updateScore();
+}
+
+function updateScore() {
+    document.getElementById('score').textContent = "Punkty: " + score;
+}
+
+function updateTimer() {
+    document.getElementById('timer').textContent = "Czas: " + timeLeft;
+}
