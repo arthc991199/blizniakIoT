@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     background-color: white;
     padding: 20px;
@@ -16,6 +16,17 @@ body {
 
 h1 {
     margin-bottom: 20px;
+}
+
+#status {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+#score, #timer {
+    font-size: 20px;
+    color: #333;
 }
 
 #incident-area, #result-area {
@@ -43,4 +54,11 @@ button:hover {
 
 #new-incident:hover {
     background-color: #218838;
+}
+
+#result-message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
 }

@@ -3,18 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Symulacja Reakcji na Incydenty git</title>
+    <title>ver 1 Symulacja Reakcji na Incydenty</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <h1>Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
+        <div id="status">
+            <p id="score">Punkty: 0</p>
+            <p id="timer">Czas: 0</p>
+        </div>
         <div id="incident-area">
             <p id="incident-description">Oczekiwanie na incydent...</p>
             <div id="actions">
                 <button onclick="handleAction('action1')">Akcja 1</button>
                 <button onclick="handleAction('action2')">Akcja 2</button>
                 <button onclick="handleAction('action3')">Akcja 3</button>
+                <button onclick="handleAction('action4')">Akcja 4</button>
+                <button onclick="handleAction('action5')">Akcja 5</button>
             </div>
         </div>
         <div id="result-area">
