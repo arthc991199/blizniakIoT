@@ -1,155 +1,129 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    text-align: center;
-    padding: 20px;
-}
-
+/* Ogólne ustawienia dla kontenera */
 .container {
-    max-width: 700px;
+    width: 90%;
     margin: 0 auto;
-    background-color: white;
+    max-width: 1200px;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    text-align: center; /* Wycentrowanie treści */
 }
 
-.header {
+/* Stylizacja logo w prawym górnym rogu */
+.logo {
     position: absolute;
     top: 10px;
     right: 10px;
-}
-
-.logo {
-    width: 150px;
-    height: auto;
-}
-
-#restart {
-    display: block;
-    margin-top: 10px;
-    background-color: orange;
-    color: white;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: auto;
-}
-
-#restart:hover {
-    background-color: darkorange;
-}
-
-h1, h2 {
+    max-width: 100px;
     margin-bottom: 20px;
 }
 
-#status {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-#score, #incident-progress, #timer {
-    font-size: 18px;
-    color: #333;
-}
-
-#incident-area, #result-area, #summary {
-    margin: 20px 0;
-}
-
+/* Stylowanie dla przycisków */
 button {
-    padding: 15px 20px;
-    margin: 5px;
+    padding: 12px 24px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+/* Stylowanie dla przycisku "Start" */
+button#start-game {
+    background-color: #ffcc00; /* Intensywny kolor żółty */
+    color: black;
+    font-weight: bold;
+}
+
+button#start-game:hover {
+    background-color: #ffbb00; /* Ciemniejszy żółty po najechaniu */
+}
+
+/* Styl dla aktywnych przycisków */
+button.enabled {
+    background-color: #007BFF; /* Niebieski kolor dla aktywnych przycisków */
+    color: white;
+}
+
+/* Styl dla poprawnych odpowiedzi */
+button.correct {
+    background-color: #28a745 !important; /* Zielony dla poprawnej odpowiedzi */
+    color: white;
+}
+
+/* Styl dla błędnych odpowiedzi */
+button.wrong {
+    background-color: #dc3545 !important; /* Czerwony dla błędnej odpowiedzi */
+    color: white;
+}
+
+/* Styl dla nieaktywnych przycisków */
+button.disabled {
+    background-color: #d3d3d3 !important; /* Szary dla nieaktywnych przycisków */
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Stylowanie dla przycisku „Kolejny incydent” */
+button#next-incident {
     background-color: #007BFF;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    width: 180px;
 }
 
-button:hover {
-    background-color: #0056b3;
+button#next-incident:hover {
+    background-color: #0056b3; /* Ciemniejszy odcień niebieskiego */
 }
 
-#start-game {
+/* Stylowanie dla przycisku „Nowa gra” */
+button#restart {
     background-color: #28a745;
+    color: white;
+    display: block; /* Upewniamy się, że jest blokowy */
+    margin: 20px auto; /* Wycentrowanie */
 }
 
-#start-game:hover {
-    background-color: #218838;
+button#restart:hover {
+    background-color: #218838; /* Ciemniejszy zielony */
 }
 
-#next-incident {
-    background-color: #28a745;
-    margin-top: 20px;
-    position: relative;
+/* Wycentrowanie treści w całej aplikacji */
+#incident-area, #result-area, #status, #summary {
+    margin-bottom: 20px;
+    text-align: center; /* Wszystkie elementy wycentrowane */
 }
 
-#next-incident:hover {
-    background-color: #218838;
+/* Rozdzielenie punktów i informacji o incydencie */
+#status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-#hint {
-    background-color: #ffcc00;
-    font-size: 14px;
-    padding: 5px 10px;
-}
-
-#hint:hover {
-    background-color: #e6b800;
-}
-
-.correct {
-    background-color: #28a745 !important;
-}
-
-.wrong {
-    background-color: #dc3545 !important;
-}
-
-#result-message {
-    font-size: 18px;
+#status p {
+    margin: 5px 0;
+    font-size: 20px;
+    font-weight: bold;
     color: #333;
-    margin-top: 20px;
 }
 
-#summary {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
+/* Stylowanie opisu incydentu */
+#incident-description {
+    font-size: 24px; /* Większy tekst */
+    font-weight: bold; /* Wyróżnienie tekstu */
+    color: #333; /* Spokojny kolor dla lepszej czytelności */
+    margin-bottom: 15px; /* Odstęp od następnych elementów */
+    text-align: center; /* Wycentrowanie opisu */
 }
 
-#final-score {
-    font-size: 22px;
-    color: #007BFF;
-}
-
-/* Ostrzeżenie */
-.warning {
-    font-size: 14px;
-    color: #666;
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-top: 30px;
-}
-
-/* Stała stopka na dole */
+/* Stylizacja stopki */
 .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #f0f0f0;
-    color: #555;
+    position: static; /* Nie przyklejamy stopki */
     text-align: center;
-    padding: 10px;
+    padding: 10px 0;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    color: #6c757d;
     font-size: 14px;
-    border-top: 1px solid #ccc;
 }
 
 .footer a {
@@ -159,4 +133,31 @@ button:hover {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+/* Stylowanie podsumowania */
+#summary {
+    display: block;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Mocniejszy cień */
+    text-align: left; /* Wyjustowanie tekstu */
+    margin-bottom: 20px; /* Odstęp na stopkę */
+}
+
+/* Ustawienia dla wersji mobilnej */
+@media only screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #summary {
+        max-height: 60vh; /* Zmniejszenie wysokości na mniejszych ekranach */
+    }
+
+    button {
+        font-size: 16px; /* Mniejsze przyciski na urządzeniach mobilnych */
+    }
 }

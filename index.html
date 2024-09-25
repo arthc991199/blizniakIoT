@@ -9,7 +9,6 @@
 <body>
     <div class="header">
         <img src="https://cyberkurs.online/wp-content/uploads/2024/09/cyberkurs.online-circe-sticker-2-nie-mow-do-mnie-gdy-sie-ucze-cybersecurity-bez-tla.png" alt="Logo" class="logo">
-        <button id="restart" onclick="restartGame()" style="display: none;">Nowa gra</button>
     </div>
 
     <div class="container">
@@ -17,9 +16,17 @@
 
         <h1 id="game-title">Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
 
+        <div id="theme-selection" style="display: none;">
+            <label for="theme">Wybierz motyw graficzny:</label>
+            <select id="theme" onchange="changeTheme(this.value)">
+                <option value="default">Domyślny</option>
+                <option value="dark">Ciemny</option>
+                <option value="light">Jasny</option>
+            </select>
+        </div>
+
         <div id="status" style="display: none;">
             <p id="score">Punkty: 0</p>
-            <p id="timer">Czas: 30s</p>
             <p id="incident-progress">Incydent: 1 z 10</p>
         </div>
 
@@ -36,7 +43,6 @@
 
         <div id="result-area" style="display: none;">
             <p id="result-message">Twoje decyzje pojawią się tutaj...</p>
-            <button id="hint" onclick="showHint()">Podpowiedź (-3 pkt)</button>
         </div>
 
         <!-- Przycisk "Kolejny incydent" pod akcjami -->
@@ -46,22 +52,16 @@
             <h2>Podsumowanie gry</h2>
             <p id="final-score">Twój wynik: 0</p>
             <div id="decision-history"></div>
-            <div id="leaderboard"></div>
-            <div id="average-stats">
-                <p id="total-games">Łączna liczba gier: 0</p>
-                <p id="total-avg-score">Średni wynik (od początku): 0</p>
-                <p id="last4h-avg-score">Średni wynik (ostatnie 4 godziny): 0</p>
-            </div>
         </div>
+
+        
+
+        <!-- Przycisk Nowa gra będzie widoczny tylko po zakończeniu -->
+        <button id="restart" onclick="restartGame()" style="display: none;">Nowa gra</button>
     </div>
 
-    <!-- Ostrzeżenie na dole strony, nad stopką -->
-    <div class="warning">
-        <p>Jeśli aplikacja nie działa poprawnie, spróbuj odświeżyć stronę. To jest prototyp.</p>
-    </div>
-
-    <!-- Stała stopka na dole ekranu -->
     <div class="footer">
+        <p>Jeśli aplikacja nie działa poprawnie, spróbuj odświeżyć stronę. To jest prototyp.</p>
         <p>cyberkurs.online – <a href="https://www.linkedin.com/in/artur-markiewicz/" target="_blank">Artur Markiewicz</a> – konsultant, trener – cyberbezpieczeństwo</p>
     </div>
 
