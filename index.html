@@ -3,32 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ver 1 Symulacja Reakcji na Incydenty</title>
+    <title>Symulacja Reakcji na Incydenty Bezpieczeństwa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="header">
+        <img src="https://cyberkurs.online/wp-content/uploads/2024/09/cyberkurs.online-circe-sticker-2-nie-mow-do-mnie-gdy-sie-ucze-cybersecurity-bez-tla.png" alt="Logo" class="logo">
+        <button id="restart" onclick="restartGame()" style="display: none;">Nowa gra</button>
+    </div>
+
     <div class="container">
-        <h1>Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
-        <div id="status">
+        <button id="start-game" onclick="startGame()">Start</button>
+
+        <h1 id="game-title">Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
+
+        <div id="status" style="display: none;">
             <p id="score">Punkty: 0</p>
-            <p id="timer">Czas: 0</p>
+            <p id="timer">Czas: 30s</p>
+            <p id="incident-progress">Incydent: 1 z 10</p>
         </div>
-        <div id="incident-area">
+
+        <div id="incident-area" style="display: none;">
             <p id="incident-description">Oczekiwanie na incydent...</p>
             <div id="actions">
-                <button onclick="handleAction('action1')">Akcja 1</button>
-                <button onclick="handleAction('action2')">Akcja 2</button>
-                <button onclick="handleAction('action3')">Akcja 3</button>
-                <button onclick="handleAction('action4')">Akcja 4</button>
-                <button onclick="handleAction('action5')">Akcja 5</button>
+                <button id="action1" onclick="handleAction('action1')">Akcja 1</button>
+                <button id="action2" onclick="handleAction('action2')">Akcja 2</button>
+                <button id="action3" onclick="handleAction('action3')">Akcja 3</button>
+                <button id="action4" onclick="handleAction('action4')">Akcja 4</button>
+                <button id="action5" onclick="handleAction('action5')">Akcja 5</button>
             </div>
         </div>
-        <div id="result-area">
+
+        <div id="result-area" style="display: none;">
             <p id="result-message">Twoje decyzje pojawią się tutaj...</p>
+            <button id="hint" onclick="showHint()">Podpowiedź (-3 pkt)</button>
         </div>
-        <button id="new-incident" onclick="generateIncident()">Nowy Incydent</button>
+
+        <!-- Przycisk "Kolejny incydent" pod akcjami -->
+        <button id="next-incident" onclick="nextIncident()" style="display: none;">Kolejny incydent</button>
+
+        <div id="summary" style="display: none;">
+            <h2>Podsumowanie gry</h2>
+            <p id="final-score">Twój wynik: 0</p>
+            <div id="decision-history"></div>
+            <div id="leaderboard"></div>
+            <div id="average-stats">
+                <p id="total-games">Łączna liczba gier: 0</p>
+                <p id="total-avg-score">Średni wynik (od początku): 0</p>
+                <p id="last4h-avg-score">Średni wynik (ostatnie 4 godziny): 0</p>
+            </div>
+        </div>
     </div>
-    
+
+    <!-- Ostrzeżenie na dole strony, nad stopką -->
+    <div class="warning">
+        <p>Jeśli aplikacja nie działa poprawnie, spróbuj odświeżyć stronę. To jest prototyp.</p>
+    </div>
+
+    <!-- Stała stopka na dole ekranu -->
+    <div class="footer">
+        <p>cyberkurs.online – <a href="https://www.linkedin.com/in/artur-markiewicz/" target="_blank">Artur Markiewicz</a> – konsultant, trener – cyberbezpieczeństwo</p>
+    </div>
+
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
