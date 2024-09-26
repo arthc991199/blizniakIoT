@@ -1,71 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Symulacja Reakcji na Incydenty Bezpieczeństwa</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Odwołanie do pliku CSS -->
 </head>
 <body>
-    <div class="header">
-        <img src="https://cyberkurs.online/wp-content/uploads/2024/09/cyberkurs.online-circe-sticker-2-nie-mow-do-mnie-gdy-sie-ucze-cybersecurity-bez-tla.png" alt="Logo" class="logo">
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="https://cyberkurs.online/wp-content/uploads/2024/09/cyberkurs.online-circe-sticker-2-nie-mow-do-mnie-gdy-sie-ucze-cybersecurity-bez-tla.png" alt="Logo">
     </div>
 
-    <div class="container">
-        <button id="start-game" onclick="startGame()">Start</button>
+    <!-- Przycisk startu gry -->
+    <button id="start-game" onclick="startGame()">Rozpocznij grę</button>
 
-        <h1 id="game-title">Symulacja Reakcji na Incydenty Bezpieczeństwa</h1>
+    
+    <!-- Status gry: punkty i licznik incydentów -->
+    <div id="status" style="display: none;">
+        <p id="score">Punkty: 0</p>
+        <p id="incident-progress">Incydent: 0 z 10</p>
+    </div>
 
-        <div id="theme-selection" style="display: none;">
-            <label for="theme">Wybierz motyw graficzny:</label>
-            <select id="theme" onchange="changeTheme(this.value)">
-                <option value="default">Domyślny</option>
-                <option value="dark">Ciemny</option>
-                <option value="light">Jasny</option>
-            </select>
+    <!-- Obszar incydentu -->
+    <div id="incident-area" style="display: none;">
+        <h2 id="incident-description">Oczekiwanie na incydent...</h2>
+        <div id="action-buttons">
+            <button id="action1" class="enabled" onclick="handleAction('action1')">Akcja 1</button>
+            <button id="action2" class="enabled" onclick="handleAction('action2')">Akcja 2</button>
+            <button id="action3" class="enabled" onclick="handleAction('action3')">Akcja 3</button>
+            <button id="action4" class="enabled" onclick="handleAction('action4')">Akcja 4</button>
+            <button id="action5" class="enabled" onclick="handleAction('action5')">Akcja 5</button>
         </div>
+        <p id="result-message">Twoje decyzje pojawią się tutaj...</p>
+        <button id="next-incident" style="display: none;" onclick="nextIncident()">Kolejny incydent</button>
+    </div>
 
-        <div id="status" style="display: none;">
-            <p id="score">Punkty: 0</p>
-            <p id="incident-progress">Incydent: 1 z 10</p>
-        </div>
+    <!-- Sekcja podsumowania -->
+    <div id="summary" style="display: none;">
+        <h2>Podsumowanie gry</h2>
+        <p id="final-score">Twój wynik: 0</p>
+        <p id="total-games">Łączna liczba gier: 0</p>
+        <p id="average-score">Średni wynik: 0</p>
+        <p id="last-four-hours">Średni wynik (ostatnie 4 godziny): 0</p>
+    
+        <h3>Twoje decyzje:</h3>
+        <div id="decision-history"></div>
 
-        <div id="incident-area" style="display: none;">
-            <p id="incident-description">Oczekiwanie na incydent...</p>
-            <div id="actions">
-                <button id="action1" onclick="handleAction('action1')">Akcja 1</button>
-                <button id="action2" onclick="handleAction('action2')">Akcja 2</button>
-                <button id="action3" onclick="handleAction('action3')">Akcja 3</button>
-                <button id="action4" onclick="handleAction('action4')">Akcja 4</button>
-                <button id="action5" onclick="handleAction('action5')">Akcja 5</button>
-            </div>
-        </div>
-
-        <div id="result-area" style="display: none;">
-            <p id="result-message">Twoje decyzje pojawią się tutaj...</p>
-        </div>
-
-        <!-- Przycisk "Kolejny incydent" pod akcjami -->
-        <button id="next-incident" onclick="nextIncident()" style="display: none;">Kolejny incydent</button>
-
-        <div id="summary" style="display: none;">
-            <h2>Podsumowanie gry</h2>
-            <p id="final-score">Twój wynik: 0</p>
-            <div id="decision-history"></div>
-        </div>
-
-        
-
-        <!-- Przycisk Nowa gra będzie widoczny tylko po zakończeniu -->
+    
+        <!-- Przycisk restartu -->
         <button id="restart" onclick="restartGame()" style="display: none;">Nowa gra</button>
     </div>
 
+    <!-- Stopka -->
     <div class="footer">
+        <p>cyberkurs.online – Artur Markiewicz – konsultant, trener – cyberbezpieczeństwo</p>
+        <p><a href="https://www.linkedin.com/in/artur-markiewicz/" target="_blank">Artur Markiewicz na LinkedIn</a></p>
         <p>Jeśli aplikacja nie działa poprawnie, spróbuj odświeżyć stronę. To jest prototyp.</p>
-        <p>cyberkurs.online – <a href="https://www.linkedin.com/in/artur-markiewicz/" target="_blank">Artur Markiewicz</a> – konsultant, trener – cyberbezpieczeństwo</p>
     </div>
 
-    <script src="data.js"></script>
-    <script src="script.js"></script>
+    <!-- Pliki JavaScript -->
+    <script src="data.js"></script>  <!-- Tablica incidents -->
+    <script src="game.js"></script>  <!-- Logika gry -->
+    <script src="actions.js"></script> <!-- Obsługa akcji -->
+    <script src="summary.js"></script>  <!-- Logika podsumowania gry -->
+
+
 </body>
 </html>

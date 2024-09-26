@@ -1,30 +1,17 @@
 let score = 0;
 let currentIncidentIndex = 0;
 const totalIncidents = 10;
-let actionTaken = false;
+let actionTaken = false; // Flaga, aby zapobiec wielokrotnemu liczeniu punktów
 let decisionHistory = [];
-
-// Losowanie incydentu
-function getRandomIncident() {
-    return incidents[currentIncidentIndex]; // Poprawka: Zamiast losowania, bierzemy incydenty po kolei
-}
+let totalGames = 0;  // Liczba gier
+let totalScore = 0;  // Suma punktów ze wszystkich gier
 
 // Start gry
 function startGame() {
-    score = 0; // Resetowanie wyniku
-    currentIncidentIndex = 0; // Ustaw początkowy indeks incydentu
-    actionTaken = false; // Resetowanie stanu decyzji
-
-    // Ukryj niepotrzebne elementy i pokaż interfejs gry
-    document.getElementById('start-game').style.display = 'none';
-    document.getElementById('theme-selection').style.display = 'block';
-    document.getElementById('status').style.display = 'flex';
-    document.getElementById('incident-area').style.display = 'block';
-    document.getElementById('result-area').style.display = 'block';
-    document.getElementById('restart').style.display = 'block';
-
-    decisionHistory = []; // Resetowanie historii decyzji
-    generateIncident();  // Rozpocznij grę, generując pierwszy incydent
+    document.getElementById('start-game').style.display = 'none';  // Ukrycie przycisku Start
+    document.getElementById('status').style.display = 'flex';      // Pokazanie statusu
+    document.getElementById('incident-area').style.display = 'block';  // Pokazanie obszaru incydentów
+    generateIncident();  // Rozpoczęcie gry od pierwszego incydentu
 }
 
 // Generowanie incydentu
@@ -41,31 +28,25 @@ function generateIncident() {
     document.getElementById('action4').textContent = incident.actions.action4.short;
     document.getElementById('action5').textContent = incident.actions.action5.short;
 
-    resetButtonColors(); // Resetowanie przycisków
-    actionTaken = false; // Reset flagi
+    // Ukrywamy przycisk „Kolejny incydent” dopóki użytkownik nie podejmie decyzji
+    document.getElementById('next-incident').style.display = 'none';
 
+    actionTaken = false;  // Resetujemy flagę po nowym incydencie
+    // Aktualizujemy numer incydentu
     document.getElementById('incident-progress').textContent = `Incydent: ${currentIncidentIndex + 1} z ${totalIncidents}`;
-    document.getElementById('next-incident').style.display = 'none'; // Ukryj przycisk "Kolejny incydent" do momentu wyboru akcji
 }
 
-// Funkcja obsługi wyboru akcji
+// Obsługa wyboru akcji
 function handleAction(action) {
-    if (actionTaken) return; // Sprawdzamy, czy użytkownik już podjął decyzję
+    if (actionTaken) return;  // Sprawdzamy, czy użytkownik już podjął decyzję
 
-    const incident = getRandomIncident();  // Pobranie aktualnego incydentu
+    const incident = incidents[currentIncidentIndex];  // Pobranie aktualnego incydentu
     const result = incident.actions[action];
 
     // Wyświetlenie feedbacku po wybraniu akcji
     document.getElementById('result-message').textContent = `${result.feedback} (MITRE: ${result.mitre})`;
 
-    // Zmieniamy kolory przycisków
-    updateButtonColors(action, result.score);
-
-    // Zaktualizowanie punktów
-    score += result.score;
-    updateScore();
-
-    // Zapisujemy decyzję użytkownika do historii
+    // Zapisanie decyzji użytkownika do historii
     decisionHistory.push({
         incident: incident.description,
         action: result.short,
@@ -73,17 +54,23 @@ function handleAction(action) {
         mitre: result.mitre
     });
 
-    actionTaken = true;  // Ustawiamy flagę, aby zablokować wielokrotne liczenie punktów
-    document.getElementById('next-incident').style.display = 'block'; // Pokaż przycisk "Kolejny incydent"
-}
+    // Natychmiastowa zmiana kolorów przycisków
+    updateButtonColors(action, result.score);
 
-// Resetowanie kolorów przycisków
-function resetButtonColors() {
-    const buttons = ['action1', 'action2', 'action3', 'action4', 'action5'];
-    buttons.forEach(button => {
-        document.getElementById(button).classList.remove('correct', 'wrong', 'disabled');
-        document.getElementById(button).classList.add('enabled'); // Powrót do koloru niebieskiego
-    });
+    // Zaktualizowanie punktów
+    score += result.score;
+
+    // Dodanie bonusu za wynik powyżej 100
+    if (score >= 100) {
+        document.getElementById('result-message').innerHTML += "<br><strong>Bonus!</strong> Otrzymujesz dodatkowe 20 punktów za przekroczenie 100 punktów.";
+        score += 20;  // Bonus 20 punktów
+    }
+
+    updateScore();
+    actionTaken = true;  // Flaga ustawiona na true, aby zablokować wielokrotne liczenie punktów
+
+    // Pokaż przycisk „Kolejny incydent” bez opóźnienia
+    document.getElementById('next-incident').style.display = 'block';
 }
 
 // Zmieniamy kolory przycisków po wyborze akcji
@@ -91,15 +78,29 @@ function updateButtonColors(selectedAction, score) {
     const buttons = ['action1', 'action2', 'action3', 'action4', 'action5'];
     buttons.forEach(button => {
         if (button === selectedAction) {
+            // Wybrany przycisk zmienia kolor w zależności od poprawności odpowiedzi
             document.getElementById(button).classList.add(score > 0 ? 'correct' : 'wrong');
         } else {
+            // Pozostałe przyciski stają się szare (nieaktywne)
             document.getElementById(button).classList.add('disabled');
         }
     });
 }
 
+// Funkcja aktualizująca wynik
+function updateScore() {
+    document.getElementById('score').textContent = "Punkty: " + score;
+}
+
 // Przejście do kolejnego incydentu
 function nextIncident() {
+    // Resetujemy kolory przycisków na niebieskie
+    const buttons = ['action1', 'action2', 'action3', 'action4', 'action5'];
+    buttons.forEach(button => {
+        document.getElementById(button).classList.remove('correct', 'wrong', 'disabled');
+        document.getElementById(button).classList.add('enabled');
+    });
+
     currentIncidentIndex++;
     if (currentIncidentIndex >= totalIncidents) {
         showSummary();  // Jeśli wszystkie incydenty zostały ukończone, pokaż ekran podsumowania
@@ -110,49 +111,65 @@ function nextIncident() {
 
 // Wyświetlenie ekranu podsumowania
 function showSummary() {
-    // Ukrycie elementów gry
+    // Ukrywamy sekcje z incydentami
     document.getElementById('incident-area').style.display = 'none';
     document.getElementById('result-area').style.display = 'none';
     document.getElementById('next-incident').style.display = 'none';
     document.getElementById('status').style.display = 'none';
 
-    // Wyświetlenie ekranu podsumowania
+    // Zwiększamy liczbę gier i sumujemy wyniki
+    totalGames++;
+    totalScore += score;
+    const averageScore = (totalScore / totalGames).toFixed(2);  // Obliczenie średniego wyniku
+
+    // Wyświetlenie podsumowania
     document.getElementById('summary').style.display = 'block';
     document.getElementById('final-score').textContent = "Twój wynik: " + score;
+    document.getElementById('total-games').textContent = "Łączna liczba gier: " + totalGames;
+    document.getElementById('average-score').textContent = "Średni wynik: " + averageScore;
 
-    // Wypełnianie podsumowania szczegółami decyzji użytkownika
+    // Wypełnianie podsumowania szczegółami decyzji
     const decisionHistoryHtml = decisionHistory.map((decision, index) => {
         return `<p><strong>Incydent ${index + 1}:</strong> <span style="color:black;">${decision.incident}</span><br>
             <strong>Wybrana akcja:</strong> <span style="color:blue;">${decision.action}</span><br>
             <strong>Feedback:</strong> <span style="color:gray;">${decision.feedback}</span><br>
             <strong>Technika defensywna:</strong> <span style="color:green;">${decision.mitre}</span></p>`;
     }).join("");
-
     document.getElementById('decision-history').innerHTML = decisionHistoryHtml;
+
+    // Wyświetlenie przycisku "Nowa gra"
+    document.getElementById('restart').style.display = 'block';
 }
 
-// Restart gry
+// Restartowanie gry
 function restartGame() {
-    // Resetowanie wyniku i liczników
+    // Resetowanie wyników i stanu gry
     score = 0;
     currentIncidentIndex = 0;
     actionTaken = false;
-    decisionHistory = []; // Czyszczenie historii decyzji
+    decisionHistory = [];
 
-    // Ukrywanie ekranu podsumowania
+    // Ukrywanie ekranu podsumowania i przywracanie elementów gry
     document.getElementById('summary').style.display = 'none';
-
-    // Przywracanie elementów gry
+    document.getElementById('restart').style.display = 'none';
+    document.getElementById('next-incident').style.display = 'none';
+    
+    // Przywracanie widoczności obszaru incydentów i statusu
     document.getElementById('incident-area').style.display = 'block';
     document.getElementById('result-area').style.display = 'block';
     document.getElementById('status').style.display = 'flex';
-    document.getElementById('restart').style.display = 'block';
-    
-    updateScore(); // Aktualizacja wyniku na ekranie
-    generateIncident(); // Rozpoczęcie nowej gry
-}
 
-// Funkcja aktualizująca wynik
-function updateScore() {
-    document.getElementById('score').textContent = "Punkty: " + score;
+    // Resetowanie wiadomości zwrotnej
+    document.getElementById('result-message').textContent = 'Twoje decyzje pojawią się tutaj...';
+
+    // Resetowanie przycisków akcji
+    const buttons = ['action1', 'action2', 'action3', 'action4', 'action5'];
+    buttons.forEach(button => {
+        document.getElementById(button).classList.remove('correct', 'wrong', 'disabled');
+        document.getElementById(button).classList.add('enabled');
+    });
+
+    updateScore();
+    generateIncident();  // Rozpocznij nową grę
 }
+console.log("Plik game.js został załadowany.");

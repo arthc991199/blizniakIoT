@@ -1,133 +1,182 @@
-/* Ogólne ustawienia dla kontenera */
-.container {
-    width: 90%;
-    margin: 0 auto;
-    max-width: 1200px;
-    padding: 20px;
+/* Resetowanie marginesów i paddingu */
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    text-align: center; /* Wycentrowanie treści */
+    font-family: Arial, sans-serif;
 }
 
-/* Stylizacja logo w prawym górnym rogu */
-.logo {
+/* Body - styl ogólny strony */
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+}
+
+/* Logo */
+.logo img {
+    width: 150px;  /* Zmniejszenie rozmiaru logo */
+    height: auto;
     position: absolute;
     top: 10px;
     right: 10px;
-    max-width: 100px;
-    margin-bottom: 20px;
 }
 
-/* Stylowanie dla przycisków */
-button {
-    padding: 12px 24px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    margin: 10px;
-    transition: background-color 0.3s;
-}
-
-/* Stylowanie dla przycisku "Start" */
+/* Przycisk startu gry */
 button#start-game {
-    background-color: #ffcc00; /* Intensywny kolor żółty */
-    color: black;
-    font-weight: bold;
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 button#start-game:hover {
-    background-color: #ffbb00; /* Ciemniejszy żółty po najechaniu */
+    background-color: #0056b3;
 }
 
-/* Styl dla aktywnych przycisków */
-button.enabled {
-    background-color: #007BFF; /* Niebieski kolor dla aktywnych przycisków */
+/* Status gry - punkty i licznik */
+#status {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    font-size: 18px;
+    position: relative;
+    width: 90%;  /* Dostosowanie szerokości */
+    margin-left: 5%;  /* Wycentrowanie */
+    margin-right: 5%;
+}
+
+#score {
+    text-align: left;   /* Punkty po lewej */
+}
+
+#incident-progress {
+    text-align: right;  /* Licznik incydentów po prawej */
+}
+
+/* Obszar incydentu */
+#incident-area {
+    text-align: center;
+    margin: 20px;
+}
+
+#incident-description {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Klawisze akcji */
+#action-buttons button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 14px;
+    background-color: #007BFF;
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px; /* Stała szerokość */
 }
 
-/* Styl dla poprawnych odpowiedzi */
+#action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Kolory przycisków po odpowiedzi */
 button.correct {
     background-color: #28a745 !important; /* Zielony dla poprawnej odpowiedzi */
-    color: white;
 }
 
-/* Styl dla błędnych odpowiedzi */
 button.wrong {
     background-color: #dc3545 !important; /* Czerwony dla błędnej odpowiedzi */
-    color: white;
 }
 
-/* Styl dla nieaktywnych przycisków */
 button.disabled {
-    background-color: #d3d3d3 !important; /* Szary dla nieaktywnych przycisków */
+    background-color: #d3d3d3 !important; /* Szary dla nieaktywnego przycisku */
     color: white;
     cursor: not-allowed;
 }
 
-/* Stylowanie dla przycisku „Kolejny incydent” */
-button#next-incident {
+/* Przycisk "Kolejny incydent" */
+#next-incident {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#next-incident:hover {
+    background-color: #e0a800;
+}
+
+/* Sekcja podsumowania */
+#summary {
+    display: none;
+    text-align: center;
+    margin: 20px;
+}
+
+#final-score {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#decision-history p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Przycisk restart w stopce */
+button#restart {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
     background-color: #007BFF;
     color: white;
-}
-
-button#next-incident:hover {
-    background-color: #0056b3; /* Ciemniejszy odcień niebieskiego */
-}
-
-/* Stylowanie dla przycisku „Nowa gra” */
-button#restart {
-    background-color: #28a745;
-    color: white;
-    display: block; /* Upewniamy się, że jest blokowy */
-    margin: 20px auto; /* Wycentrowanie */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 button#restart:hover {
-    background-color: #218838; /* Ciemniejszy zielony */
+    background-color: #0056b3;
 }
 
-/* Wycentrowanie treści w całej aplikacji */
-#incident-area, #result-area, #status, #summary {
-    margin-bottom: 20px;
-    text-align: center; /* Wszystkie elementy wycentrowane */
-}
-
-/* Rozdzielenie punktów i informacji o incydencie */
-#status {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#status p {
-    margin: 5px 0;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Stylowanie opisu incydentu */
-#incident-description {
-    font-size: 24px; /* Większy tekst */
-    font-weight: bold; /* Wyróżnienie tekstu */
-    color: #333; /* Spokojny kolor dla lepszej czytelności */
-    margin-bottom: 15px; /* Odstęp od następnych elementów */
-    text-align: center; /* Wycentrowanie opisu */
-}
-
-/* Stylizacja stopki */
+/* Stopka */
 .footer {
-    position: static; /* Nie przyklejamy stopki */
+    margin-top: auto;
+    background-color: #333;
+    color: white;
     text-align: center;
     padding: 10px 0;
-    background-color: #f8f9fa;
-    border-top: 1px solid #dee2e6;
-    color: #6c757d;
     font-size: 14px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
+.footer p {
+    margin: 5px 0;
+}
+
+/* Link w stopce */
 .footer a {
-    color: #007BFF;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -135,29 +184,13 @@ button#restart:hover {
     text-decoration: underline;
 }
 
-/* Stylowanie podsumowania */
-#summary {
-    display: block;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Mocniejszy cień */
-    text-align: left; /* Wyjustowanie tekstu */
-    margin-bottom: 20px; /* Odstęp na stopkę */
+/* Mniejsza czcionka dla ostrzeżenia */
+.footer p:last-child {
+    font-size: 12px;
 }
 
-/* Ustawienia dla wersji mobilnej */
-@media only screen and (max-width: 768px) {
-    .container {
-        width: 100%;
-        padding: 10px;
-    }
-
-    #summary {
-        max-height: 60vh; /* Zmniejszenie wysokości na mniejszych ekranach */
-    }
-
-    button {
-        font-size: 16px; /* Mniejsze przyciski na urządzeniach mobilnych */
-    }
+/* Większa czcionka dla głównego tekstu w stopce */
+.footer p:first-child {
+    font-size: 16px;
+    font-weight: bold;
 }

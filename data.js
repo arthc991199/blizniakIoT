@@ -351,3 +351,4 @@ const incidents = [
         }
     }
 ];
+console.log("Plik game.js został załadowany.");
