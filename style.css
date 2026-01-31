@@ -1,162 +1,196 @@
-body {
+/* Resetowanie marginesów i paddingu */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
+}
+
+/* Body - styl ogólny strony */
+body {
     background-color: #f4f4f4;
-    text-align: center;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
 }
 
-.container {
-    max-width: 700px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.header {
+/* Logo */
+.logo img {
+    width: 150px;  /* Zmniejszenie rozmiaru logo */
+    height: auto;
     position: absolute;
     top: 10px;
     right: 10px;
 }
 
-.logo {
-    width: 150px;
-    height: auto;
-}
-
-#restart {
+/* Przycisk startu gry */
+button#start-game {
+    margin: 20px auto;
     display: block;
-    margin-top: 10px;
-    background-color: orange;
-    color: white;
-    padding: 10px 15px;
+    padding: 10px 20px;
     font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: auto;
-}
-
-#restart:hover {
-    background-color: darkorange;
-}
-
-h1, h2 {
-    margin-bottom: 20px;
-}
-
-#status {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-#score, #incident-progress, #timer {
-    font-size: 18px;
-    color: #333;
-}
-
-#incident-area, #result-area, #summary {
-    margin: 20px 0;
-}
-
-button {
-    padding: 15px 20px;
-    margin: 5px;
     background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
-    width: 180px;
 }
 
-button:hover {
+button#start-game:hover {
     background-color: #0056b3;
 }
 
-#start-game {
-    background-color: #28a745;
-}
-
-#start-game:hover {
-    background-color: #218838;
-}
-
-#next-incident {
-    background-color: #28a745;
-    margin-top: 20px;
+/* Status gry - punkty i licznik */
+#status {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    font-size: 18px;
     position: relative;
+    width: 90%;  /* Dostosowanie szerokości */
+    margin-left: 5%;  /* Wycentrowanie */
+    margin-right: 5%;
+}
+
+#score {
+    text-align: left;   /* Punkty po lewej */
+}
+
+#incident-progress {
+    text-align: right;  /* Licznik incydentów po prawej */
+}
+
+/* Obszar incydentu */
+#incident-area {
+    text-align: center;
+    margin: 20px;
+}
+
+#incident-description {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Klawisze akcji */
+#action-buttons button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 14px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px; /* Stała szerokość */
+}
+
+#action-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Kolory przycisków po odpowiedzi */
+button.correct {
+    background-color: #28a745 !important; /* Zielony dla poprawnej odpowiedzi */
+}
+
+button.wrong {
+    background-color: #dc3545 !important; /* Czerwony dla błędnej odpowiedzi */
+}
+
+button.disabled {
+    background-color: #d3d3d3 !important; /* Szary dla nieaktywnego przycisku */
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Przycisk "Kolejny incydent" */
+#next-incident {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #next-incident:hover {
-    background-color: #218838;
+    background-color: #e0a800;
 }
 
-#hint {
-    background-color: #ffcc00;
-    font-size: 14px;
-    padding: 5px 10px;
-}
-
-#hint:hover {
-    background-color: #e6b800;
-}
-
-.correct {
-    background-color: #28a745 !important;
-}
-
-.wrong {
-    background-color: #dc3545 !important;
-}
-
-#result-message {
-    font-size: 18px;
-    color: #333;
-    margin-top: 20px;
-}
-
+/* Sekcja podsumowania */
 #summary {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
+    display: none;
+    text-align: center;
+    margin: 20px;
 }
 
 #final-score {
-    font-size: 22px;
-    color: #007BFF;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-/* Ostrzeżenie */
-.warning {
-    font-size: 14px;
-    color: #666;
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-top: 30px;
+#decision-history p {
+    font-size: 16px;
+    margin-bottom: 10px;
 }
 
-/* Stała stopka na dole */
+/* Przycisk restart w stopce */
+button#restart {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button#restart:hover {
+    background-color: #0056b3;
+}
+
+/* Stopka */
 .footer {
-    position: fixed;
+    margin-top: auto;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    position: relative;
     bottom: 0;
     width: 100%;
-    background-color: #f0f0f0;
-    color: #555;
-    text-align: center;
-    padding: 10px;
-    font-size: 14px;
-    border-top: 1px solid #ccc;
 }
 
+.footer p {
+    margin: 5px 0;
+}
+
+/* Link w stopce */
 .footer a {
-    color: #007BFF;
+    color: #ffffff;
     text-decoration: none;
 }
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+/* Mniejsza czcionka dla ostrzeżenia */
+.footer p:last-child {
+    font-size: 12px;
+}
+
+/* Większa czcionka dla głównego tekstu w stopce */
+.footer p:first-child {
+    font-size: 16px;
+    font-weight: bold;
 }
